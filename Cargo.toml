@@ -1,0 +1,17 @@
+[package]
+name = "ktf"
+version = "0.1.0"
+edition = "2018"
+authors = ["CypherLink"]
+description = "Keep TDN Forever Plan."
+keywords = ["cryptography", "cryptocurrency", "zkp", "tdn"]
+categories = ["cryptography", "cryptocurrency"]
+license = "MIT/Apache-2.0"
+
+[workspace]
+members = [
+    "core",
+]
+
+[dependencies]
+ktf-core = { version = "0.1", path = "./core" }
