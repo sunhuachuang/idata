@@ -1,22 +1,39 @@
 use std::sync::Arc;
-use tdn::types::{
-    primitive::HandleResult,
-    rpc::{json, RpcHandler},
+use tdn::{
+    smol::lock::RwLock,
+    types::{
+        primitive::HandleResult,
+        rpc::{json, RpcHandler, RpcParam},
+    },
 };
 
-pub struct State(u32);
+use crate::wallet::Wallet;
 
-pub fn inject_rpc() -> RpcHandler<State> {
-    let mut rpc_handler = RpcHandler::new(State(1));
-    rpc_handler.add_method("echo", |params, state: Arc<State>| async move {
-        assert_eq!(1, state.0);
+pub struct State {
+    wallet: RwLock<Wallet>,
+}
+
+pub fn inject_rpc(wallet: Wallet) -> RpcHandler<State> {
+    let mut rpc_handler = RpcHandler::new(State {
+        wallet: RwLock::new(wallet),
+    });
+
+    rpc_handler.add_method("echo", |params, _state: Arc<State>| async move {
         Ok(HandleResult::rpc(json!(params)))
     });
 
-    rpc_handler.add_method("say_hello", |_params, state: Arc<State>| async move {
-        assert_eq!(1, state.0);
-        Ok(HandleResult::rpc(json!("hello")))
-    });
+    rpc_handler.add_method(
+        "new-tx",
+        |params: Vec<RpcParam>, state: Arc<State>| async move {
+            let to = params[0].as_str()?; // to address
+            let amount = params[1].as_f64()?; // amount
+
+            let tx = state.wallet.write().await.build_tx([0u8; 32], amount)?;
+            println!("{:?}", tx);
+
+            Ok(HandleResult::rpc(json!({"to": to, "amount": amount})))
+        },
+    );
 
     rpc_handler
 }

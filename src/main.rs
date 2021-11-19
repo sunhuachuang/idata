@@ -1,7 +1,10 @@
 mod generator;
+mod group;
 mod miner;
+mod proof;
 mod rpc;
 mod transaction;
+mod wallet;
 
 use tdn::prelude::*;
 
@@ -10,7 +13,7 @@ fn main() {
         let (peer_addr, send, out_recv) = start().await.unwrap();
         println!("Example: peer id: {}", peer_addr.short_show());
 
-        let rpc_handler = rpc::inject_rpc();
+        let rpc_handler = rpc::inject_rpc(wallet::Wallet::load().unwrap());
         // tdn::smol::spawn(miner::start_miner()).detach();
 
         while let Ok(message) = out_recv.recv().await {
@@ -25,7 +28,10 @@ fn main() {
                     RecvType::Leave(peer) => {
                         println!("receive group peer {} leave", peer.short_show());
                     }
-                    RecvType::Event(peer, _data) => {
+                    RecvType::Event(peer, data) => {
+                        if let Ok(handle_result) = group.write().await.handle(peer, data) {
+                            handle(handle_result, now_rpc_uid, true, &sender).await;
+                        }
                         println!("receive group event from {}", peer.short_show());
                     }
                     _ => {}

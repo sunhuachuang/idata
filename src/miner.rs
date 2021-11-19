@@ -3,6 +3,10 @@ use tdn::smol::lock::RwLock;
 
 use crate::transaction::Transaction;
 
+pub struct Round {
+    //
+}
+
 pub struct Block {
     hash: [u8; 32],
     txs: Vec<Transaction>,
