@@ -1,32 +1,17 @@
-#[derive(Debug)]
-pub struct Input {
-    //
+//mod anonymos;
+//mod exchange;
+pub mod transfer;
+
+pub trait Input {}
+
+pub trait Output {
+    type Input: Input;
+    fn to_input(&self) -> Self::Input;
 }
 
-#[derive(Debug)]
-pub struct Output {
-    //
-}
+pub trait Transaction {
+    type Input: Input;
+    type Output: Output;
 
-impl Output {
-    pub fn to_input(&self) -> Input {
-        Input {}
-    }
-}
-
-#[derive(Debug)]
-pub struct Transaction {
-    hash: [u8; 32],
-    inputs: Vec<Input>,
-    outputs: Vec<Output>,
-}
-
-impl Transaction {
-    pub fn new(inputs: Vec<Input>, outputs: Vec<Output>) -> Self {
-        Self {
-            hash: [0u8; 32],
-            inputs,
-            outputs,
-        }
-    }
+    fn new(inputs: Vec<Self::Input>, outputs: Vec<Self::Output>) -> Self;
 }

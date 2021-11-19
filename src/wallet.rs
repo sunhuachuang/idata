@@ -1,23 +1,26 @@
-use std::io::Result;
+use tdn::types::primitive::Result;
 
-use crate::transaction::{Output, Transaction};
+use crate::transaction::{
+    transfer::{TransferOutput, TransferTransaction},
+    Output, Transaction,
+};
 
 pub struct Wallet {
-    outputs: Vec<(f64, Output)>,
+    transfers: Vec<(f64, TransferOutput)>,
 }
 
 impl Wallet {
     pub fn load() -> Result<Wallet> {
         Ok(Wallet {
-            outputs: vec![(1.0, Output {}), (2.0, Output {})],
+            transfers: vec![(1.0, TransferOutput {}), (2.0, TransferOutput {})],
         })
     }
 
-    pub fn build_tx(&mut self, to: [u8; 32], amount: f64) -> Result<Transaction> {
+    pub fn build_tx(&mut self, to: [u8; 32], amount: f64) -> Result<TransferTransaction> {
         let mut selected = vec![];
         let mut selected_amount: f64 = 0.0;
 
-        for i in self.outputs.iter() {
+        for i in self.transfers.iter() {
             selected_amount += i.0;
             selected.push(i.1.to_input());
             if selected_amount >= amount {
@@ -25,7 +28,7 @@ impl Wallet {
             }
         }
 
-        let outputs = vec![Output {}, Output {}];
+        let outputs = vec![TransferOutput {}, TransferOutput {}];
 
         Ok(Transaction::new(selected, outputs))
     }

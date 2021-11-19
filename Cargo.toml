@@ -16,3 +16,4 @@ members = [
 [dependencies]
 ktf-core = { version = "0.1", path = "./core" }
 tdn = { git = "https://github.com/cypherlink/TDN", branch="main" } # default: one group, multiple layers
+tokio = { version = "1", features = ["full"] }

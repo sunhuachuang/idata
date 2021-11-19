@@ -1,11 +1,9 @@
 use std::sync::Arc;
-use tdn::{
-    smol::lock::RwLock,
-    types::{
-        primitive::HandleResult,
-        rpc::{json, RpcHandler, RpcParam},
-    },
+use tdn::types::{
+    primitive::HandleResult,
+    rpc::{json, RpcError, RpcHandler, RpcParam},
 };
+use tokio::sync::RwLock;
 
 use crate::wallet::Wallet;
 
@@ -25,11 +23,10 @@ pub fn inject_rpc(wallet: Wallet) -> RpcHandler<State> {
     rpc_handler.add_method(
         "new-tx",
         |params: Vec<RpcParam>, state: Arc<State>| async move {
-            let to = params[0].as_str()?; // to address
-            let amount = params[1].as_f64()?; // amount
+            let to = params[0].as_str().ok_or(RpcError::ParseError)?; // to address
+            let amount = params[1].as_f64().ok_or(RpcError::ParseError)?; // amount
 
             let tx = state.wallet.write().await.build_tx([0u8; 32], amount)?;
-            println!("{:?}", tx);
 
             Ok(HandleResult::rpc(json!({"to": to, "amount": amount})))
         },
