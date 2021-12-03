@@ -37,4 +37,8 @@ impl Transaction for TransferTransaction {
             outputs,
         }
     }
+
+    fn valid(&self) -> bool {
+        todo!()
+    }
 }

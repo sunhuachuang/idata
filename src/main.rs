@@ -1,7 +1,12 @@
+#[macro_use]
+extern crate anyhow;
+
 mod generator;
 //mod group;
 //mod miner;
 //mod proof;
+mod address;
+mod bytes;
 mod rpc;
 mod transaction;
 mod wallet;

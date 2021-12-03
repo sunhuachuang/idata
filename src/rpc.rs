@@ -5,6 +5,7 @@ use tdn::types::{
 };
 use tokio::sync::RwLock;
 
+use crate::address::Address;
 use crate::wallet::Wallet;
 
 pub struct State {
@@ -23,10 +24,11 @@ pub fn inject_rpc(wallet: Wallet) -> RpcHandler<State> {
     rpc_handler.add_method(
         "new-tx",
         |params: Vec<RpcParam>, state: Arc<State>| async move {
-            let to = params[0].as_str().ok_or(RpcError::ParseError)?; // to address
-            let amount = params[1].as_f64().ok_or(RpcError::ParseError)?; // amount
+            let to = params[0].as_str().ok_or(RpcError::ParseError)?; // to
+            let addr = Address::from_str(to)?;
+            let amount = params[1].as_u64().ok_or(RpcError::ParseError)? as u128; // amount
 
-            let tx = state.wallet.write().await.build_tx([0u8; 32], amount)?;
+            let _tx = state.wallet.write().await.build_transfer_tx(addr, amount)?;
 
             Ok(HandleResult::rpc(json!({"to": to, "amount": amount})))
         },

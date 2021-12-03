@@ -1,6 +1,5 @@
-/// Anonymous transaction for privary.
-/// Use zero-knowledge proof to implement.
+/// Anonymous transaction receiver for privary.
 
-pub struct AnonymousTransaction {
+pub struct AnonymosProof {
     //
 }
