@@ -1,10 +1,10 @@
 [package]
-name = "ktf-core"
+name = "idata-core"
 version = "0.1.0"
 edition = "2018"
-authors = ["CypherLink"]
-description = "Keep TDN Forever Plan (Core Library)."
-keywords = ["cryptography", "cryptocurrency", "zkp", "tdn"]
+authors = ["Sun"]
+description = "iData (Core Library)."
+keywords = ["cryptography", "cryptocurrency", "zkp", "data"]
 categories = ["cryptography", "cryptocurrency"]
 license = "MIT/Apache-2.0"
 

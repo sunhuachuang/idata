@@ -25,7 +25,7 @@ async fn main() {
         match message {
             ReceiveMessage::Group(msg) => match msg {
                 RecvType::Connect(peer, _data) => {
-                    println!("receive group peer {} join", peer.short_show());
+                    println!("receive group peer {} join", peer.id.short_show());
                 }
                 RecvType::Result(..) => {
                     //
@@ -33,7 +33,7 @@ async fn main() {
                 RecvType::Leave(peer) => {
                     println!("receive group peer {} leave", peer.short_show());
                 }
-                RecvType::Event(peer, data) => {
+                RecvType::Event(peer, _data) => {
                     // if let Ok(handle_result) = group.write().await.handle(peer, data) {
                     //     handle(handle_result, now_rpc_uid, true, &sender).await;
                     // }
@@ -46,7 +46,7 @@ async fn main() {
                     println!(
                         "Layer Join: {}, Addr: {}.",
                         gid.short_show(),
-                        peer.short_show()
+                        peer.id.short_show()
                     );
                 }
                 RecvType::Result(..) => {

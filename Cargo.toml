@@ -1,10 +1,10 @@
 [package]
-name = "ktf"
+name = "idata"
 version = "0.1.0"
 edition = "2021"
-authors = ["CypherLink"]
-description = "Keep TDN Forever Plan."
-keywords = ["cryptography", "cryptocurrency", "zkp", "tdn"]
+authors = ["Sun"]
+description = "iData."
+keywords = ["cryptography", "cryptocurrency", "zkp", "data"]
 categories = ["cryptography", "cryptocurrency"]
 license = "MIT/Apache-2.0"
 
@@ -15,6 +15,6 @@ members = [
 
 [dependencies]
 anyhow = "1.0"
-ktf-core = { version = "0.1", path = "./core" }
+idata-core = { version = "0.1", path = "./core" }
 tdn = { git = "https://github.com/cypherlink/TDN", branch="main" } # default: one group, multiple layers
 tokio = { version = "1", features = ["full"] }
