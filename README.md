@@ -10,10 +10,9 @@ Inspired by [CympleTech's data protocol](https://github.com/CympleTech/data-prot
 - Let data **process**  safely -> *Decentralized Process*
 
 ### 1. Decentralized Transfer
-## Features
-- Based on P2P network
-- How to up and running (Incentives)
-  - Keep online for mine
+- Must based on P2P network
+- How to up and running it (MUST NEED Incentives, [Why?]())
+  - Keep online for mine (Relayer)
   - Verifiable random functions & BFT for consensus
   - Zero-knowledge cuttable UTXO
 
