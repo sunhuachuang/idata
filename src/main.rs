@@ -3,7 +3,7 @@ extern crate anyhow;
 
 mod generator;
 //mod group;
-//mod miner;
+//mod mine;
 //mod proof;
 mod address;
 mod bytes;

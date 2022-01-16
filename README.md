@@ -3,6 +3,8 @@ Decentralized data/dataFi ecological. [Researching]
 
 Inspired by [CympleTech's data protocol](https://github.com/CympleTech/data-protocol).
 
+Purpose: Security & Privacy
+
 ## What it wants ?
 - Let data **transfer** safely -> *Decentralized Transfer*
 - Let data **storage**  safely -> *Decentralized Storage*
@@ -11,8 +13,8 @@ Inspired by [CympleTech's data protocol](https://github.com/CympleTech/data-prot
 
 ### Design
 - Must based on P2P network
-- How to up and running it (MUST NEED Incentives (Proof of Service))
-  - Services
+- How to up and running it ( MUST NEED Incentives, [Why? TANSTAAFL!](https://en.wikipedia.org/wiki/There_ain%27t_no_such_thing_as_a_free_lunch) )
+  - Proof of Services
     - Online for relay data quickly. (*proof of online*) **Basicly**
     - Compute for process data correctly. (*proof of compute*)
     - Storage for store data forever. (*proof of storage*)
@@ -21,6 +23,7 @@ Inspired by [CympleTech's data protocol](https://github.com/CympleTech/data-prot
     - Verifiable random functions & BFT for consensus
     - Zero-knowledge cuttable UTXO
     - Support multiple transaction types
+      - anonymos token
       - transfer token
       - exchange data
       - storage data

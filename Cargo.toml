@@ -3,15 +3,29 @@ name = "idata"
 version = "0.1.0"
 edition = "2021"
 authors = ["Sun"]
-description = "iData."
-keywords = ["cryptography", "cryptocurrency", "zkp", "data"]
-categories = ["cryptography", "cryptocurrency"]
+description = "Data & DataFi."
+keywords = ["cryptocurrency", "data", "datafi"]
+categories = ["cryptocurrency", "data"]
 license = "MIT/Apache-2.0"
+publish = false
+default-run = "miner"
 
 [workspace]
 members = [
     "core",
 ]
+
+[[bin]]
+name = "light" # light peer, for user use.
+path = "src/light.rs"
+
+[[bin]]
+name = "miner" # proof of online and keep blockchain state.
+path = "src/miner.rs"
+
+[[bin]]
+name = "full" # include miner and light.
+path = "src/main.rs"
 
 [dependencies]
 anyhow = "1.0"
