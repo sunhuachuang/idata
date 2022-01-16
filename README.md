@@ -1,5 +1,5 @@
 # iData
-Decentralized data ecological. [research project]
+Decentralized data/dataFi ecological. [Researching]
 
 Inspired by [CympleTech's data protocol](https://github.com/CympleTech/data-protocol).
 
@@ -9,12 +9,22 @@ Inspired by [CympleTech's data protocol](https://github.com/CympleTech/data-prot
 - Let data **exchange** safely -> *Decentralized Exchange*
 - Let data **process**  safely -> *Decentralized Process*
 
-### 1. Decentralized Transfer
+### Design
 - Must based on P2P network
-- How to up and running it (MUST NEED Incentives, [Why?]())
-  - Keep online for mine (Relayer)
-  - Verifiable random functions & BFT for consensus
-  - Zero-knowledge cuttable UTXO
+- How to up and running it (MUST NEED Incentives (Proof of Service))
+  - Services
+    - Online for relay data quickly. (*proof of online*) **Basicly**
+    - Compute for process data correctly. (*proof of compute*)
+    - Storage for store data forever. (*proof of storage*)
+  - Build blockchain and on-chain
+    - Online for mining (generate)
+    - Verifiable random functions & BFT for consensus
+    - Zero-knowledge cuttable UTXO
+    - Support multiple transaction types
+      - transfer token
+      - exchange data
+      - storage data
+      - process data
 
 ## Code structure
 - Core Library (Self-balance / Self-transactions / Validate-consensus / Full-Miners-DHT)
